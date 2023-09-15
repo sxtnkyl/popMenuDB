@@ -11,7 +11,7 @@ My familiar language is Javascript so this directory is built with typescript an
 TypeOrm is a Typescript compatible ORM that integrates easily with postrges and provides a [quick start setup](https://typeorm.io/#quick-start) with
 `npx typeorm init`
 
-When using typeOrm, the [Entity](https://typeorm.io/#create-an-entity) is the model decorator.
+When using typeOrm, the [Entity](https://typeorm.io/entities#what-is-entity) is the model decorator, or a class that maps to a table.
 
 Prerequisites include having node.js installed, a local postgresdb running with db details matching in `/popMenuTypeOrm/data-source.js`, and global Typescript installed.
 
