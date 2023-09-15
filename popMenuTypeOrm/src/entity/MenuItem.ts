@@ -1,17 +1,14 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
+import { IdNameBase } from "./IdNameBase";
 import { Menu } from "./Menu";
 
 /**
  * The Menu Item model.
+ *
+ * @ManyToOne - a MenuItem may be on multiple Menus
  */
 @Entity()
-export class MenuItem {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
+export class MenuItem extends IdNameBase {
   @Column()
   description: string;
 

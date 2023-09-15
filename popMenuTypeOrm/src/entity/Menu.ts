@@ -1,4 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, OneToMany } from "typeorm";
+import { IdNameBase } from "./IdNameBase";
 import { MenuItem } from "./MenuItem";
 
 /**
@@ -7,13 +8,7 @@ import { MenuItem } from "./MenuItem";
  * @OneToMany - a Menu may have multiple MenuItems
  */
 @Entity()
-export class Menu {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
+export class Menu extends IdNameBase {
   @OneToMany(() => MenuItem, (menuItem) => menuItem.menu)
   menuItems: MenuItem[];
 }
