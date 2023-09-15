@@ -15,8 +15,8 @@ export class MenuItem {
   @Column()
   description: string;
 
-  @Column()
-  price: string;
+  @Column("decimal", { scale: 2 })
+  price: number;
 
   @ManyToOne(() => Menu, (menu) => menu.menuItems)
   menu: Menu;
