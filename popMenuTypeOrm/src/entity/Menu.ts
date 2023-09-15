@@ -1,7 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { MenuItem } from "./MenuItem";
 
 /**
  * The Menu model.
+ *
+ * @OneToMany - a Menu may have multiple MenuItems
  */
 @Entity()
 export class Menu {
@@ -10,4 +13,7 @@ export class Menu {
 
   @Column()
   name: string;
+
+  @OneToMany(() => MenuItem, (menuItem) => menuItem.menu)
+  menuItems: MenuItem[];
 }

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Menu } from "./Menu";
 
 /**
  * The Menu Item model.
@@ -16,4 +17,7 @@ export class MenuItem {
 
   @Column()
   price: string;
+
+  @ManyToOne(() => Menu, (menu) => menu.menuItems)
+  menu: Menu;
 }
