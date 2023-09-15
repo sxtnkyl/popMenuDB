@@ -21,8 +21,8 @@ describe("Menu class", () => {
   it("should create a menu relationship", () => {
     const menu = new Menu();
     const menuItem = new MenuItem();
-    menuItem.menu = menu;
+    menuItem.menus = [menu];
 
-    expect(menuItem.menu).toBe(menu);
+    expect(menuItem.menus[0]).toBe(menu);
   });
 });
