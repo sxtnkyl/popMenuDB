@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, Unique } from "typeorm";
 import { IdNameBase } from "./IdNameBase";
 import { Menu } from "./Menu";
 
@@ -8,6 +8,7 @@ import { Menu } from "./Menu";
  * @ManyToOne - many MenuItem may belong to one Menu
  */
 @Entity()
+@Unique(["name"])
 export class MenuItem extends IdNameBase {
   @Column()
   description: string;
