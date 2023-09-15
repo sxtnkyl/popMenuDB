@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { Menu } from "./entity/Menu";
 import { MenuItem } from "./entity/MenuItem";
+import { Restaurant } from "./entity/Restaurant";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -12,7 +13,7 @@ export const AppDataSource = new DataSource({
   database: "popMenuTypeOrm",
   synchronize: true,
   logging: false,
-  entities: [Menu, MenuItem],
+  entities: [Restaurant, Menu, MenuItem],
   migrations: [],
   subscribers: [],
 });

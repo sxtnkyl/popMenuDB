@@ -5,7 +5,7 @@ import { Menu } from "./Menu";
 /**
  * The Menu Item model.
  *
- * @ManyToOne - a MenuItem may be on multiple Menus
+ * @ManyToOne - many MenuItem may belong to one Menu
  */
 @Entity()
 export class MenuItem extends IdNameBase {
