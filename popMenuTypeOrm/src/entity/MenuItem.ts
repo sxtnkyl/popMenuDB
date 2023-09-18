@@ -1,13 +1,14 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToMany, Unique } from "typeorm";
 import { IdNameBase } from "./IdNameBase";
 import { Menu } from "./Menu";
 
 /**
  * The Menu Item model.
  *
- * @ManyToOne - a MenuItem may be on multiple Menus
+ * @ManyToMany - many MenuItem may belong to multiple Menu
  */
 @Entity()
+@Unique(["name"])
 export class MenuItem extends IdNameBase {
   @Column()
   description: string;
@@ -15,6 +16,6 @@ export class MenuItem extends IdNameBase {
   @Column("decimal", { scale: 2 })
   price: number;
 
-  @ManyToOne(() => Menu, (menu) => menu.menuItems)
-  menu: Menu;
+  @ManyToMany(() => Menu, (menu) => menu.menuItems)
+  menus: Menu[];
 }

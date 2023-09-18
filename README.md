@@ -25,3 +25,10 @@ My thoughts on the given completion criteria
 
 - Create an object model for Menu and MenuItem classes
   - one-to-many relationship for Menu-to-MenuItem
+
+### Level 2: Multiple Menus
+
+- update the relationships so that multiple Menu instances can associate with multiple MenuItem and multiple MenuItem can associate with multiple Menu.
+- adding a Unique decorator to the MenuItem, added JoinTable to the owning Menu to connect MenuItem, and
+- database has not yet been set up, so unit test still reflect properties only
+  - interesting note: might be worth adding a multi column unique constraint to MenuItem. Currently, by making the name column unique, one restaurant may have ownership over all instances of a common item. For example, Red Lobster may have 'Chicken Wings', which would mean KFC could not. In this case a multi-column-unique-constraint may be beneficial to associate a restaurant id before name on the MenuItem table.
