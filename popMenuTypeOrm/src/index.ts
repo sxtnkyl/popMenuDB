@@ -20,11 +20,13 @@ AppDataSource.initialize()
     // const menuTable = await AppDataSource.manager.find(Menu);
     // console.log("menu table: ", menuTable);
 
-    // NOTE: this drop is only included to functionally mimic a fresh menu upload
+    // NOTE: this drop is only included to avoid having to reset before next upload
     // do not do this in prod!
+    console.log("dropping db...");
     await connection.dropDatabase();
 
     // best practice to close the connection
+    console.log("closing connection...");
     await AppDataSource.destroy();
   })
   .catch((error) => console.log(error));

@@ -1,3 +1,6 @@
+/**
+ * Data types for JSON upload
+ */
 export type MenuName = "menu_items" | "dishes";
 export type MenuItem = {
   name: string;
@@ -19,3 +22,12 @@ export type RestaurantObject = {
 export type UploadObject = {
   restaurants: RestaurantObject[];
 };
+
+/**
+ * other types
+ */
+
+export interface PostgresError {
+  code: string;
+  message: string;
+}

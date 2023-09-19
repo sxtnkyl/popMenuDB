@@ -3,12 +3,14 @@ import { Menu } from "../entity/Menu";
 import { MenuItem } from "../entity/MenuItem";
 import { Restaurant } from "../entity/Restaurant";
 import { UploadObject } from "../types/types";
+import { classValidatorHandler } from "./classValidatorHandler";
+import { dbActionHandler } from "./dbActionHandler";
 
 export const seedDbFromUploads = async (
   connection: DataSource,
   menuObject: UploadObject
 ) => {
-  // create seed tables
+  // get tables
   const restaurantRepo = connection.getRepository(Restaurant);
   const menuRepo = connection.getRepository(Menu);
   const menuItemRepo = connection.getRepository(MenuItem);
@@ -28,13 +30,14 @@ export const seedDbFromUploads = async (
           const menuItem = new MenuItem();
           menuItem.name = item.name;
           menuItem.price = item.price;
-          menuItem.description = item?.description ?? "";
+          menuItem.description = item.description || "";
 
           menuItem.menus = menuItem.menus || [];
           menuItem.menus.push(menu);
 
           // save menuItem to MenuItem table
-          await menuItemRepo.save(menuItem);
+          await classValidatorHandler(menuItem);
+          await dbActionHandler(() => menuItemRepo.save(menuItem));
 
           // add new item to the menu
           menu.menuItems = menu.menuItems || [];
@@ -46,9 +49,11 @@ export const seedDbFromUploads = async (
       }
 
       //save menu to Menu table
-      await menuRepo.save(menu);
+      await classValidatorHandler(menu);
+      await dbActionHandler(() => menuRepo.save(menu));
       // save restaurant to Restaurant table
-      await restaurantRepo.save(restaurant);
+      await classValidatorHandler(restaurant);
+      await dbActionHandler(() => restaurantRepo.save(restaurant));
     }
   }
 };

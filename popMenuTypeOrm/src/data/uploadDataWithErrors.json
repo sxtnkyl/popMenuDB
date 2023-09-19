@@ -8,7 +8,7 @@
           "menu_items": [
             {
               "name": "Burger",
-              "price": 9.0
+              "price": -9.0
             },
             {
               "name": "Small Salad",
@@ -20,7 +20,7 @@
           "name": "dinner",
           "menu_items": [
             {
-              "name": "Burger2",
+              "name": "Burger",
               "price": 15.0
             },
             {
@@ -42,11 +42,11 @@
               "price": 9.0
             },
             {
-              "name": "Burger3",
+              "name": "Burger",
               "price": 9.0
             },
             {
-              "name": "Chicken Wings2",
+              "name": "Chicken Wings",
               "price": 9.0
             }
           ]
