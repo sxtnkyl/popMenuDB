@@ -1,11 +1,11 @@
 import "reflect-metadata";
-import { DataSource } from "typeorm";
+import { DataSource, DataSourceOptions } from "typeorm";
 import { Menu } from "./entity/Menu";
 import { MenuItem } from "./entity/MenuItem";
 import { Restaurant } from "./entity/Restaurant";
 require("dotenv").config();
 
-export const AppDataSource = new DataSource({
+export const dataSourceConfig: DataSourceOptions = {
   type: "postgres",
   host: process.env.DB_HOST,
   port: 5432,
@@ -13,8 +13,11 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   synchronize: true,
+  dropSchema: true,
   logging: false,
   entities: [Restaurant, Menu, MenuItem],
   migrations: [],
   subscribers: [],
-});
+};
+
+export const AppDataSource = new DataSource(dataSourceConfig);

@@ -18,13 +18,8 @@ AppDataSource.initialize()
     console.log("logging the inserted table data...");
     await outputHandler(connection);
 
-    // NOTE: this drop is only included to avoid having to reset before next upload
-    // do not do this in prod!
-    console.log("dropping db...");
-    await connection.dropDatabase();
-
     // best practice to close the connection
     console.log("closing connection...");
-    await AppDataSource.destroy();
+    await connection.destroy();
   })
   .catch((error) => console.log(error));
