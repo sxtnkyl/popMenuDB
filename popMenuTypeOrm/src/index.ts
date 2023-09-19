@@ -1,5 +1,6 @@
 import { AppDataSource } from "./data-source";
 import { dbUpload } from "./util/dbUpload";
+import { outputHandler } from "./util/outputHandler";
 import { seedDbFromUploads } from "./util/seedDbFromUpload";
 
 const jsonDataPath = `./src/data/uploadData.json`;
@@ -14,11 +15,8 @@ AppDataSource.initialize()
     console.log("Seeding db with uploaded json...");
     await seedDbFromUploads(connection, uploadData);
 
-    // console.log("logging the inserted table data...")
-    // const restaurantTable = await AppDataSource.manager.find(Restaurant);
-    // console.log("restaurant table: ", restaurantTable);
-    // const menuTable = await AppDataSource.manager.find(Menu);
-    // console.log("menu table: ", menuTable);
+    console.log("logging the inserted table data...");
+    await outputHandler(connection);
 
     // NOTE: this drop is only included to avoid having to reset before next upload
     // do not do this in prod!
