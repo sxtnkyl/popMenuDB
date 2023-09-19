@@ -1,17 +1,30 @@
 import { AppDataSource } from "./data-source";
+import { dbUpload } from "./util/dbUpload";
+import { seedDbFromUploads } from "./util/seedDbFromUpload";
+
+const jsonDataPath = `./src/data/uploadData.json`;
 
 AppDataSource.initialize()
-  .then(async () => {
-    // console.log("Inserting a new user into the database...")
-    // const user = new User()
-    // user.firstName = "Timber"
-    // user.lastName = "Saw"
-    // user.age = 25
-    // await AppDataSource.manager.save(user)
-    // console.log("Saved a new user with id: " + user.id)
-    // console.log("Loading users from the database...")
-    // const users = await AppDataSource.manager.find(User)
-    // console.log("Loaded users: ", users)
-    // console.log("Here you can setup and run express / fastify / any other framework.")
+  .then(async (connection) => {
+    console.log("connected: ");
+
+    console.log("reading input for db upload...");
+    const uploadData = await dbUpload(jsonDataPath);
+
+    console.log("Seeding db with uploaded json...");
+    await seedDbFromUploads(connection, uploadData);
+
+    // console.log("logging the inserted table data...")
+    // const restaurantTable = await AppDataSource.manager.find(Restaurant);
+    // console.log("restaurant table: ", restaurantTable);
+    // const menuTable = await AppDataSource.manager.find(Menu);
+    // console.log("menu table: ", menuTable);
+
+    // NOTE: this drop is only included to functionally mimic a fresh menu upload
+    // do not do this in prod!
+    await connection.dropDatabase();
+
+    // best practice to close the connection
+    await AppDataSource.destroy();
   })
   .catch((error) => console.log(error));
